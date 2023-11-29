@@ -2,7 +2,7 @@ import turtle
 import pandas
 
 screen = turtle.Screen()
-screen.title("Special Italy Quizz")
+screen.title("Special Italy Quiz")
 initial_background = "sources/img/image.gif"
 sicily_background = "sources/img/sicily-map.gif"
 italy_background = "sources/img/italy-map.gif"
@@ -14,6 +14,7 @@ turtle.shape(initial_background)
 
 
 def right_guess(right_name, x, y):
+    """Make the right guess be written on screen, in the correspon position of the region/province""""
     t = turtle.Turtle()
     t.penup()
     t.hideturtle()
@@ -21,8 +22,8 @@ def right_guess(right_name, x, y):
     t.write(f"{right_name}")
 
 
-quizz_type = screen.textinput(title="Select your quizz", prompt="Type Italy or Sicily to start").title()
-if quizz_type == "Sicily":
+quiz_type = screen.textinput(title="Select your quizz", prompt="Type Italy or Sicily to start").title()
+if quiz_type == "Sicily":
     turtle.shape(sicily_background)
     screen.setup(height=432, width=600)
     sicily_data = pandas.read_csv("sources/csv/sicily_provinces.csv", delimiter=";")
@@ -40,9 +41,7 @@ if quizz_type == "Sicily":
             right_guess(right_name=user_guess, x=province_x, y=province_y)
 
         if user_guess == "Exit":
-            for province in sicily_provinces:
-                if province not in guessed_provinces:
-                    missing_provinces.append(province)
+            missing_provinces = [province for province in sicily_provinces if province not in guessed_provinces]
             break
 
     if len(guessed_provinces) == 9:
@@ -51,7 +50,7 @@ if quizz_type == "Sicily":
         screen.textinput(title=f"You missed {len(missing_provinces)}",
                          prompt=f"You missed the following provinces: {missing_provinces}. Type anything to exit")
 
-elif quizz_type == "Italy":
+elif quiz_type == "Italy":
     turtle.shape(italy_background)
     screen.setup(height=560, width=700)
     italy_data = pandas.read_csv("sources/csv/italy_regions.csv")
@@ -76,9 +75,7 @@ elif quizz_type == "Italy":
             right_guess(right_name=user_guess, x=region_x, y=region_y)
 
         if user_guess == "Exit":
-            for region in italy_regions:
-                if region not in guessed_regions:
-                    missing_regions.append(region)
+            missing_regions = [region for region in italy_regions if region not in guessed_regions]
             break
 
     if len(guessed_regions) == len(italy_regions):
