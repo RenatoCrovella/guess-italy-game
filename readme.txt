@@ -1,10 +1,10 @@
 To play this game, you have 2 paths:
 
-<h3>First path:</h3>
+## First path:
 1. Download this project by clicking on Code -> Download ZIP
 2. Unzip folder and open it in PyCharm
 3. Open "main.py" file and run it. 
-<h3>Second path:</h3>
+## Second path:
 - Go to https://replit.com/@renatocrovellad/guess-italy-game?v=1 and hit "run".
 
 
